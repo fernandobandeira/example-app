@@ -16,10 +16,10 @@ class CreateCoffeesTable extends Migration
         Schema::create('coffees', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamp('schedule');
-            $table->integer('profile_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('profile_id')->references('id')->on('profiles');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

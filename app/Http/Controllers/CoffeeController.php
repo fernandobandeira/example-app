@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Coffee;
-use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 
 class CoffeeController extends Controller
 {
-    public function index(Profile $profile)
+    public function index(User $user)
     {
-      return $profile->coffees;
+      return $user->coffees;
     }
 
-    public function store(Request $request, Profile $profile)
+    public function store(Request $request, User $user)
     {
       $coffee = new Coffee($request->only(['schedule']));
-      $profile->coffees()->save($coffee);
+      $user->coffees()->save($coffee);
 
       return $coffee;
     }

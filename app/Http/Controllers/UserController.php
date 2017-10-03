@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-      return Profile::All();
+      return User::All();
     }
 
     public function store(Request $request)
     {
-      return Profile::create($request->only([
+      return User::create($request->only([
         'username',
         'fullname',
       ]));
     }
 
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, User $user)
     {
-      return tap($profile)->update($request->only([
+      return tap($user)->update($request->only([
         'username',
         'fullname',
       ]));

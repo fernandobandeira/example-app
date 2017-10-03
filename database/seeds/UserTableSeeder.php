@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProfileTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ProfileTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Profile::class, 10)->create();
+        factory(App\User::class, 10)->create();
     }
 }

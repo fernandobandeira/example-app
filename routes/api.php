@@ -13,10 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('profiles', 'ProfileController', ['only' => [
+Route::resource('users', 'UserController', ['only' => [
     'index', 'store', 'update',
 ]]);
 
-Route::resource('profiles.coffees', 'CoffeeController', ['only' => [
+Route::resource('users.coffees', 'CoffeeController', ['only' => [
     'index', 'store',
 ]]);
