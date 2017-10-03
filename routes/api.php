@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::resource('profiles', 'ProfileController', ['only' => [
     'index', 'store', 'update',
 ]]);
+
+Route::resource('profiles.coffees', 'CoffeeController', ['only' => [
+    'index', 'store',
+]]);
