@@ -1,0 +1,12 @@
+<div ngbDropdown class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="profilesSelect" ngbDropdownToggle>
+    {{ selected ? selected.fullname : 'Select User' }}
+  </a>
+  <div ngbDropdownMenu aria-labelledby="profilesSelect">
+    <a class="dropdown-item"
+      *ngFor="let user of filteredUsers"
+      (click)="changeSelected(user)">
+      {{ user.fullname }}
+    </a>
+  </div>
+</div>
