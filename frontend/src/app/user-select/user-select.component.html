@@ -1,6 +1,6 @@
 <div ngbDropdown class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" id="profilesSelect" ngbDropdownToggle>
-    {{ selected ? selected.fullname : 'Select User' }}
+    {{ userService.selected ? userService.selected.fullname : 'Select User' }}
   </a>
   <div ngbDropdownMenu aria-labelledby="profilesSelect">
     <a class="dropdown-item"

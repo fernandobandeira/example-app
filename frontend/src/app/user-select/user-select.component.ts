@@ -11,20 +11,19 @@ export class UserSelectComponent implements OnInit {
 
   private users: User[] = [];
   private filteredUsers: User[] = [];
-  private selected: User;
 
-  constructor(private userService: UsersService) { }
+  constructor(public userService: UsersService) { }
 
   ngOnInit() {
     this.userService.getUsers()
       .subscribe(data => {
-        this.users = data
+        this.users = data;
         this.filteredUsers = this.users;
       });
   }
 
   changeSelected(user) {
-    this.selected = user;
+    this.userService.selected = user;
     this.filteredUsers = this.users.filter(u => u !== user);
   }
 }

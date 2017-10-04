@@ -7,16 +7,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { UsersService } from './users.service';
 import { UserSelectComponent } from './user-select/user-select.component';
+import { CoffeesComponent } from './coffees/coffees.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
-  { path: 'profile', component: AppComponent },
-  { path: 'coffees', component: AppComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'coffees', component: CoffeesComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserSelectComponent,
+    CoffeesComponent,
+    ProfileComponent,
   ],
   imports: [
     NgbModule.forRoot(),
