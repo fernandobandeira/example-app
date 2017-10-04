@@ -2,7 +2,7 @@
   <tbody>
     <tr *ngFor="let coffee of coffees">
       <td>
-        {{ coffee.schedule }}
+        {{ moment.unix(coffee.schedule).format('LLL') }}
       </td>
     </tr>
   </tbody>
