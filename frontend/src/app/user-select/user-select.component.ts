@@ -11,6 +11,7 @@ export class UserSelectComponent implements OnInit {
 
   private users: User[] = [];
   private filteredUsers: User[] = [];
+  public selected: User;
 
   constructor(public userService: UsersService) { }
 
@@ -20,10 +21,13 @@ export class UserSelectComponent implements OnInit {
         this.users = data;
         this.filteredUsers = this.users;
       });
+
+    this.userService.selected
+      .subscribe(selected => this.selected = selected);
   }
 
-  changeSelected(user) {
-    this.userService.selected = user;
+  changeSelected(user: User) {
+    this.userService.changeSelected(user);
     this.filteredUsers = this.users.filter(u => u !== user);
   }
 }

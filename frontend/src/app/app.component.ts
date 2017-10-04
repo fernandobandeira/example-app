@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { User } from "./user";
 import { UsersService } from "./users.service";
 
 @Component({
@@ -8,4 +9,11 @@ import { UsersService } from "./users.service";
 })
 export class AppComponent {
   constructor(public userService: UsersService) { }
+
+  public selected: User;
+
+  ngOnInit() {
+    this.userService.selected
+      .subscribe(selected => this.selected = selected);
+  }
 }
