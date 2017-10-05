@@ -10,7 +10,7 @@ import { UsersService } from "./../users.service";
 export class UserSelectComponent implements OnInit {
 
   private users: User[] = [];
-  private filteredUsers: User[] = [];
+  public filteredUsers: User[] = [];
   public selected: User;
 
   constructor(public userService: UsersService) { }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Coffee;
 use App\User;
+use App\Coffee;
 use Illuminate\Http\Request;
+use App\Http\Requests\CoffeeRequest;
 
 class CoffeeController extends Controller
 {
@@ -13,7 +14,7 @@ class CoffeeController extends Controller
       return $user->coffees;
     }
 
-    public function store(Request $request, User $user)
+    public function store(CoffeeRequest $request, User $user)
     {
       $coffee = new Coffee($request->only(['schedule']));
       $user->coffees()->save($coffee);

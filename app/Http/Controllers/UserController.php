@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -12,7 +13,7 @@ class UserController extends Controller
       return User::All();
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
       return User::create($request->only([
         'username',
@@ -20,7 +21,7 @@ class UserController extends Controller
       ]));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
       return tap($user)->update($request->only([
         'username',

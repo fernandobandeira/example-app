@@ -12,7 +12,7 @@ import { UsersService } from "./../users.service";
 })
 export class CoffeesComponent implements OnInit {
 
-  private coffees: Coffee[] = [];
+  public coffees: Coffee[] = [];
   public moment = moment;
   public coffeeForm: FormGroup;
 
