@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Coffee } from "./../coffee";
 import { UsersService } from "./../users.service";
@@ -18,11 +19,14 @@ export class CoffeesComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private fb: FormBuilder,
+    public toastr: ToastsManager,
+    public vRef: ViewContainerRef,
   ) {
     this.coffeeForm = this.fb.group({
       date: [''],
       time: [''],
     });
+    this.toastr.setRootViewContainerRef(vRef);
   }
 
   ngOnInit() {
@@ -53,10 +57,14 @@ export class CoffeesComponent implements OnInit {
 
     this.userService.createCoffee({ schedule })
       .subscribe(coffee => {
+        this.toastr.success('Coffee created');
+        this.coffees.push(coffee);
         this.userService.getCoffees()
           .subscribe(coffees => {
             this.coffees = coffees;
           });
+      }, error => {
+        this.toastr.error(error);
       });
   }
 }

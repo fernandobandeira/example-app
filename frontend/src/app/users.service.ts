@@ -7,6 +7,8 @@ import { User } from "./user";
 import { Coffee } from "./coffee";
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class UsersService {
@@ -25,12 +27,14 @@ export class UsersService {
 
   getUsers() {
     return this.http.get(this.url)
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   getCoffees() {
     return this.http.get(`${this.url}/${this._selected.getValue().id}/coffees`)
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   changeSelected(user: User) {
@@ -39,12 +43,14 @@ export class UsersService {
 
   updateUser(user: User) {
     return this.http.put(`${this.url}/${this._selected.getValue().id}`, user)
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   createCoffee(coffee: Coffee) {
     return this.http.post(`${this.url}/${this._selected.getValue().id}/coffees`, coffee)
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   refreshUsers() {
@@ -52,5 +58,20 @@ export class UsersService {
       .subscribe(users => {
         this._users.next(users);
       });
+  }
+
+  handleError(error: any) {
+    let errorBody = JSON.parse(error._body);
+
+    if (errorBody.errors !== undefined) {
+      let key = Object.keys(errorBody.errors)[0];
+
+      return Observable.throw(errorBody.errors[key][0]);
+    }
+    if (errorBody.message !== '') {
+      return Observable.throw(errorBody.message);
+    }
+
+    return Observable.throw('Something went wrong!');
   }
 }

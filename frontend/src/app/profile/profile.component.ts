@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { User } from "./../user";
 import { UsersService } from "./../users.service";
@@ -17,11 +18,14 @@ export class ProfileComponent implements OnInit {
   constructor(
     public userService: UsersService,
     private fb: FormBuilder,
+    public toastr: ToastsManager,
+    public vRef: ViewContainerRef,
   ) {
     this.profileForm = this.fb.group({
       fullname: ['', Validators.required ],
       username: ['', Validators.required ],
     });
+    this.toastr.setRootViewContainerRef(vRef);
   }
 
   ngOnInit() {
@@ -44,6 +48,10 @@ export class ProfileComponent implements OnInit {
       .subscribe(user => {
         this.userService.changeSelected(user);
         this.userService.refreshUsers();
+        this.toastr.success('Updated user profile');
+      }, error => {
+        this.userService.changeSelected(this.selected);
+        this.toastr.error(error);
       });
   }
 
