@@ -12,14 +12,15 @@ export class UsersService {
 
   private url: string = "http://localhost:8000/api/users";
 
-  private _selected: BehaviorSubject<User> = new BehaviorSubject({
-    id: undefined,
-    username: undefined,
-    fullname: undefined,
-  });
+  private _users: BehaviorSubject<User []> = new BehaviorSubject([]);
+  public readonly users: Observable<User []> = this._users.asObservable();
+
+  private _selected: BehaviorSubject<User> = new BehaviorSubject(null);
   public readonly selected: Observable<User> = this._selected.asObservable();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.refreshUsers();
+  }
 
   getUsers() {
     return this.http.get(this.url)
@@ -33,5 +34,17 @@ export class UsersService {
 
   changeSelected(user: User) {
     this._selected.next(user);
+  }
+
+  updateUser(user: User) {
+    return this.http.put(`${this.url}/${this._selected.getValue().id}`, user)
+      .map(res => res.json());
+  }
+
+  refreshUsers() {
+    this.getUsers()
+      .subscribe(users => {
+        this._users.next(users);
+      });
   }
 }

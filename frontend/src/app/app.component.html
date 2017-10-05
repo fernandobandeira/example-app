@@ -10,7 +10,7 @@
   </ul>
 </nav>
 <div class="container" style="margin-top: 40px;">
-  <div *ngIf="selected.id; else selectProfile">
+  <div *ngIf="selected; else selectProfile">
     <router-outlet></router-outlet>
   </div>
   <ng-template #selectProfile>

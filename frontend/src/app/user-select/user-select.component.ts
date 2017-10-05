@@ -16,18 +16,29 @@ export class UserSelectComponent implements OnInit {
   constructor(public userService: UsersService) { }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe(data => {
-        this.users = data;
-        this.filteredUsers = this.users;
+    this.userService.users
+      .subscribe(users => {
+        this.users = users;
+        this.filterUsers();
       });
 
     this.userService.selected
-      .subscribe(selected => this.selected = selected);
+      .subscribe(selected => {
+        this.selected = selected
+        this.filterUsers();
+      });
   }
 
   changeSelected(user: User) {
     this.userService.changeSelected(user);
-    this.filteredUsers = this.users.filter(u => u !== user);
+  }
+
+  filterUsers() {
+    this.filteredUsers = this.users.filter(user => {
+      if(this.selected !== null) {
+        return this.selected.id !== user.id;
+      }
+      return true;
+    });
   }
 }
