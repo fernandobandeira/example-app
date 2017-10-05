@@ -7,3 +7,15 @@
     </tr>
   </tbody>
 </table>
+
+<form class="form-inline" [formGroup]="coffeeForm" (ngSubmit)="addCoffee()">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <input type="text" class="form-control" ngbDatepicker placeholder="yyyy-mm-dd" formControlName="date" #d="ngbDatepicker">
+    <button class="input-group-addon" (click)="d.toggle()" type="button">
+      <img src="assets/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+    </button>
+  </div>
+  <ngb-timepicker formControlName="time" class="mb-2 mr-sm-2 mb-sm-0" [meridian]="true"></ngb-timepicker>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

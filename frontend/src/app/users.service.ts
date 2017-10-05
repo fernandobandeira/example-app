@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { User } from "./user";
+import { Coffee } from "./coffee";
 
 import 'rxjs/add/operator/map';
 
@@ -38,6 +39,11 @@ export class UsersService {
 
   updateUser(user: User) {
     return this.http.put(`${this.url}/${this._selected.getValue().id}`, user)
+      .map(res => res.json());
+  }
+
+  createCoffee(coffee: Coffee) {
+    return this.http.post(`${this.url}/${this._selected.getValue().id}/coffees`, coffee)
       .map(res => res.json());
   }
 

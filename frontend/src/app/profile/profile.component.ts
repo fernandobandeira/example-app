@@ -11,6 +11,9 @@ import { UsersService } from "./../users.service";
 })
 export class ProfileComponent implements OnInit {
 
+  public selected: User;
+  public profileForm: FormGroup;
+
   constructor(
     public userService: UsersService,
     private fb: FormBuilder,
@@ -20,10 +23,6 @@ export class ProfileComponent implements OnInit {
       username: ['', Validators.required ],
     });
   }
-
-  public selected: User;
-
-  public profileForm: FormGroup;
 
   ngOnInit() {
     this.userService.selected
